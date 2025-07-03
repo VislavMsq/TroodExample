@@ -1,22 +1,22 @@
 # syntax=docker/dockerfile:1
 
-# --- Stage 1: сборка — у нас есть Maven + JDK
-FROM maven:3.9.3-openjdk-17 AS builder
+# --- Stage 1: сборка с Maven + JDK (multi-arch)
+FROM maven:3.8.7-openjdk-18-slim AS builder
 WORKDIR /app
 
-# Сначала копируем только pom.xml и скачиваем зависимости
+# скачиваем зависимости
 COPY pom.xml .
 RUN mvn dependency:go-offline
 
-# Копируем исходники и собираем
+# собираем приложение
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-# --- Stage 2: рантайм, только JRE
-FROM eclipse-temurin:17-jre-alpine
+# --- Stage 2: рантайм на базе Ubuntu Jammy (multi-arch)
+FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
 
-# Копируем готовый JAR из builder-стейджа
+# копируем готовый JAR из builder’а
 COPY --from=builder /app/target/*.jar app.jar
 
 EXPOSE 8080
