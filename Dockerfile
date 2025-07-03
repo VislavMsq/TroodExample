@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # --- Stage 1: сборка — у нас есть Maven + JDK
-FROM maven:3.9.0-openjdk-17 AS builder
+FROM maven:3.9.3-openjdk-17 AS builder
 WORKDIR /app
 
 # Сначала копируем только pom.xml и скачиваем зависимости
