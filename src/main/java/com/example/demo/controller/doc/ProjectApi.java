@@ -1,6 +1,7 @@
 package com.example.demo.controller.doc;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -74,7 +75,7 @@ public interface ProjectApi {
     )
     @PutMapping("/projects/{id}")
     ResponseEntity<ProjectDto> update(
-            @Parameter(description = "ID проекта") @PathVariable String id,
+            @Parameter(description = "ID проекта") @PathVariable UUID id,
             @Valid @RequestBody ProjectDto project);
 
     @Operation(

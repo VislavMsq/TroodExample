@@ -36,8 +36,8 @@ public class ProjectController implements ProjectApi {
     }
 
     @Override
-    public ResponseEntity<ProjectDto> update(@PathVariable String id, @Valid @RequestBody ProjectDto dto) {
-        return projectService.update(UUID.fromString(id), dto)
+    public ResponseEntity<ProjectDto> update(@PathVariable UUID id, @Valid @RequestBody ProjectDto dto) {
+        return projectService.update(id, dto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

@@ -34,7 +34,14 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectDto create(ProjectDto dto) {
+        if (dto.getId() != null) {
+            projectRepository.findById(dto.getId()).ifPresent(existing -> {
+                throw new IllegalArgumentException("Project with given ID already exists");
+            });
+        }
+
         Project entity = ProjectMapper.toEntity(dto);
+        entity.setId(null); // на всякий случай
         Project saved = projectRepository.save(entity);
         return ProjectMapper.toDto(saved);
     }

@@ -33,10 +33,10 @@ public class VacancyServiceImpl implements VacancyService {
         return vacancyRepository.findById(id).map(VacancyMapper::toDto);
     }
 
-    @Override
     public Optional<VacancyDto> create(UUID projectId, VacancyDto dto) {
         return projectRepository.findById(projectId).map(project -> {
             Vacancy vacancy = VacancyMapper.toEntity(dto);
+            vacancy.setId(null);               // <— сбрасываем, чтобы Hibernate сделал INSERT
             vacancy.setProject(project);
             Vacancy saved = vacancyRepository.save(vacancy);
             return VacancyMapper.toDto(saved);

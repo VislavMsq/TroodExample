@@ -82,4 +82,4 @@ JDBC URL: `jdbc:h2:mem:testdb`
 
 ---
 
-**Деплой:** стандартный Spring Boot jar, можно деплоить на любой сервер с Java 17+ или через Docker (см. выше). # TroodExample
+**Деплой:** стандартный Spring Boot jar, можно деплоить на любой сервер с Java 17+ или через Docker (см. выше). 
