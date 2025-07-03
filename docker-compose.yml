@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     image: trood-example-service:latest
     ports:
-      - '8080:8080'
+      - '8099:8080'
     # Если хотите явно задать порт из переменной окружения:
     # - SERVER_PORT=8080
     restart: unless-stopped
