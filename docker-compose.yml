@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: trood-example-service:latest
+    ports:
+      - '8080:8080'
+    # Если хотите явно задать порт из переменной окружения:
+    # - SERVER_PORT=8080
+    restart: unless-stopped
+
+  # Пример подключения Postgres (раскомментируйте при необходимости)
+  # db:
+  #   image: postgres:15-alpine
+  #   environment:
+  #     POSTGRES_DB: demo
+  #     POSTGRES_USER: demo
+  #     POSTGRES_PASSWORD: secret
+  #   volumes:
+  #     - db-data:/var/lib/postgresql/data
+  #   ports:
+  #     - '5432:5432'
+  #
+  # app:
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/demo
+  #     - SPRING_DATASOURCE_USERNAME=demo
+  #     - SPRING_DATASOURCE_PASSWORD=secret
+
+#volumes:
+#  db-data:
